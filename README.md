@@ -5,7 +5,7 @@
 
 ### 🏷️ 项目架构图
 <p align="center">
-    <img src="./架构图.png" alt="alt text" width="400" height="400">
+    <img src="./架构图.png" alt="alt text" >
 </p>
 
 ### 😊 主要功能
