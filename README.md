@@ -19,3 +19,14 @@
 ## 📺️ 视频演示
 [观看视频](https://www.bilibili.com/video/BV14FY1ejEun/?spm_id_from=333.999.0.0&vd_source=49d7dc394125d1aa584fca04e78a909f)
 
+
+## 🧾 任务
+
+- [x] 文本生成功能
+- [x] 文旅知识库创建
+- [ ] 语音识别功能
+- [x] 语音生成功能
+- [x] 数字人功能
+- [ ] Lagent工具调用
+- [x] RAG检索
+- [ ] 模型持续微调
