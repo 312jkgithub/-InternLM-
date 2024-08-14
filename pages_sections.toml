@@ -1,0 +1,17 @@
+[[pages]]
+path = "/root/wenlv/pages/text.py"
+name = "文本问答"
+icon = "📄"
+
+
+[[pages]]
+path = "/root/wenlv/pages/voice.py"
+name = "语音合成"
+icon = "🎤"
+
+[[pages]]
+path = "/root/wenlv/pages/human.py"
+name = "数字人"
+icon = ":💁‍♀️:"
+
+
