@@ -1,0 +1,4 @@
+name: sadtakler
+channels:
+  - defaults
+prefix: /root/.conda/envs/sadtakler

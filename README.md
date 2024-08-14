@@ -30,3 +30,91 @@
 - [ ] Lagent工具调用
 - [x] RAG检索
 - [ ] 模型持续微调
+
+## 🛠️ 使用方法
+
+### 环境准备
+
+#### RAG环境准备
+
+```bash
+# 恢复RAG虚拟环境
+ cd environment
+ conda env create -f  demo.yml
+```
+
+#### TTS环境准备
+
+```bash
+# 恢复RAG虚拟环境
+ cd environment
+ conda env create -f  cosyvoice.yml
+```
+
+#### TTS环境准备
+
+```bash
+# 恢复RAG虚拟环境
+ cd environment
+ conda env create -f  sadtalker.yml
+```
+
+### 系统运行
+
+运行页面端
+
+```bash
+conda activate demo
+streamlit run page.py
+```
+
+运行RAG服务
+
+```bash
+cd rag
+conda activate demo
+python client.py
+```
+
+运行TTS服务
+
+```bash
+cd tts
+conda activate cosyvoice
+python tts_server.py
+```
+
+运行数字人服务
+
+```bash
+cd data_human
+conda activate sadtalker
+python api_server.py
+```
+
+## 未来规划
+
+- 在模型方面，将不断迭代模型微调，符合文旅场景。
+- 在应用方面，将引入agent功能。
+
+
+## 💕 致谢
+
+***感谢 上海人工智能实验室 组织的书生·浦语大模型实战营学习活动 和 提供的强大算力支持~***
+
+***感谢 OpenXLab 对项目部署的算力支持~***
+
+***感谢 浦语小助手 对项目的支持~***
+
+项目中所涉及的内容包括：
+
+[**InternStudio**](https://studio.intern-ai.org.cn/)  
+[**Tutorial**](https://github.com/InternLM/tutorial)  
+[**InternLM**](https://github.com/InternLM/InternLM)  
+[**XTuner**](https://github.com/InternLM/xtuner)   
+[**LMDeploy**](https://github.com/InternLM/lmdeploy)  
+
+感谢项目中使用的其他开源组件，包括：
+* 文本转语音模型：[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)
+* 数字人生成模型：[SadTalker](https://github.com/OpenTalker/SadTalker)
+* Embedding模型：[bce-embedding-base_v1](https://www.modelscope.cn/models/netease-youdao/bce-embedding-base_v1)
