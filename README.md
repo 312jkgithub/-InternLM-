@@ -38,7 +38,6 @@
 #### RAG环境准备
 
 ```bash
-# 恢复RAG虚拟环境
  cd environment
  conda env create -f  demo.yml
 ```
@@ -46,7 +45,6 @@
 #### TTS环境准备
 
 ```bash
-# 恢复RAG虚拟环境
  cd environment
  conda env create -f  cosyvoice.yml
 ```
@@ -54,7 +52,6 @@
 #### TTS环境准备
 
 ```bash
-# 恢复RAG虚拟环境
  cd environment
  conda env create -f  sadtalker.yml
 ```
