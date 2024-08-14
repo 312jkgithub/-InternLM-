@@ -16,5 +16,5 @@
 3. 语音回答
 4. 数字人交互
 
-### 🚩 项目愿景
-问任何关于旅行的事情都可以从模型获取，并且保证信息的时效性和真实性。
+## 📺️ 讲解视频
+[观看视频](https://www.bilibili.com/video/BV14FY1ejEun/?spm_id_from=333.999.0.0&vd_source=49d7dc394125d1aa584fca04e78a909f)
