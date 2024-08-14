@@ -7,11 +7,27 @@ from db_vector import splite_batch_md,get_vectordb,query_top_K
 from diskcache_client import diskcache_client
 
 MAX_HISTORY_SESSION_LENGTH = 2
-EMBED_PATH="/root/models/bce-embedding-base_v1"
-db_vector="/root/wenlv/rag/db_vector"
+import configparser
+import os
+# 获取当前文件的绝对路径
+current_file_path = os.path.abspath(__file__)
+# 获取当前文件的目录路径（上一级）
+parent_dir_path = os.path.dirname(current_file_path)
+# 获取上两级目录的路径
+grandparent_dir_path = os.path.dirname(parent_dir_path)
+
+config = configparser.ConfigParser()
+conf_path=grandparent_dir_path+'/config.ini'
+print(conf_path)
+config.read(conf_path)
+EMBED_PATH = config['paths']['embedding_path']
+
+# EMBED_PATH="/root/models/bce-embedding-base_v1"
+# db_vector="/root/wenlv/rag/db_vector"
 # Duration in seconds before a session expires
 SESSION_EXPIRE_TIME = 1800
 def build_wenlv_prompt(question: str):
+    assert EMBED_PATH != None
     embed = Embedd(EMBED_PATH)
     embeddings = embed.embeddings
     # 从缓存中取出wenlv数据信息

@@ -14,8 +14,21 @@ import uvicorn
 from fastapi import FastAPI
 from utils import torch_gc
 from lmdeploy import pipeline,TurbomindEngineConfig,GenerationConfig
-app=app = FastAPI()
+import configparser
+import os
+# 获取当前文件的绝对路径
+current_file_path = os.path.abspath(__file__)
+# 获取当前文件的目录路径（上一级）
+parent_dir_path = os.path.dirname(current_file_path)
+# 获取上两级目录的路径
+grandparent_dir_path = os.path.dirname(parent_dir_path)
 
+config = configparser.ConfigParser()
+conf_path=grandparent_dir_path+'/config.ini'
+print(conf_path)
+config.read(conf_path)
+app=app = FastAPI()
+llm_model_path = config['paths']['llm_model_path']
 # pip install autoawq
 from pydantic import BaseModel
 class RagItem(BaseModel):
@@ -23,8 +36,9 @@ class RagItem(BaseModel):
 @app.post("/rag1")
 def llm_response(question: RagItem):
     try:
-        path="/group_share/merged"
-        model= InternLM2Chat(path)
+        # path="/group_share/merged"
+        assert llm_model_path != None
+        model= InternLM2Chat(llm_model_path)
         prompt= build_wenlv_prompt(question=question.text)
         chat=model.chat(prompt,[])
         
@@ -75,7 +89,9 @@ def rag_lmdeploy(question: RagItem):
     try:
      
         backend_config = TurbomindEngineConfig(model_format="hf", cache_max_entry_count=0.01,session_len=32768)
-        pipe = pipeline("/group_share/merged", model_name="internlm2",backend_config=backend_config)
+        # pipe = pipeline("/group_share/merged", model_name="internlm2",backend_config=backend_config)
+        assert llm_model_path != None
+        pipe = pipeline(llm_model_path, model_name="internlm2",backend_config=backend_config)
         prompt= build_wenlv_prompt(question=question.text)
         response = pipe([prompt])
         print(prompt)

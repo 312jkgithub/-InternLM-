@@ -13,7 +13,23 @@ from  embed import Embedd
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from LLM import InternLM2Chat
 from langchain.retrievers import BM25Retriever
+
+import configparser
 import os
+# 获取当前文件的绝对路径
+current_file_path = os.path.abspath(__file__)
+# 获取当前文件的目录路径（上一级）
+parent_dir_path = os.path.dirname(current_file_path)
+# 获取上两级目录的路径
+grandparent_dir_path = os.path.dirname(parent_dir_path)
+
+config = configparser.ConfigParser()
+conf_path=grandparent_dir_path+'/config.ini'
+print(conf_path)
+config.read(conf_path)
+# EMBED_PATH = config['paths']['embedding_path']
+db_vector = config['paths']['db_vector_path']
+
 def splite_batch_md(files_path :List[str]):
     docs =[]
     for file  in  files_path:
@@ -40,10 +56,11 @@ def splite_md(file_path :str):
 def create_db_vector(embed :HuggingFaceEmbeddings,docs):
     # 将文档进行向量化处理
     db = FAISS.from_documents(docs, embed)
-    db_path="./db_vector"
-    db.save_local(folder_path=db_path, index_name='wenlv')
+    # db_path="./db_vector"
+    assert db_vector != None
+    db.save_local(folder_path=db_vector, index_name='wenlv')
     print("保存成功")
-    return db_path
+    return db_vector
 
 def get_vectordb(embed: HuggingFaceEmbeddings,db_path:str='./db_vector'):
     db=FAISS.load_local(folder_path= db_path, index_name='wenlv', embeddings=embed,

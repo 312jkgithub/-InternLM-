@@ -11,8 +11,23 @@ from src.facerender.animate import AnimateFromCoeff
 from src.generate_batch import get_data
 from src.generate_facerender_batch import get_facerender_data
 from src.utils.init_path import init_path
+import configparser
+import os
+# 获取当前文件的绝对路径
+current_file_path = os.path.abspath(__file__)
+# 获取当前文件的目录路径（上一级）
+parent_dir_path = os.path.dirname(current_file_path)
+# 获取上两级目录的路径
+grandparent_dir_path = os.path.dirname(parent_dir_path)
 
+config = configparser.ConfigParser()
+conf_path=grandparent_dir_path+'/config.ini'
+# print(conf_path)
+config.read(conf_path)
 
+sadtalker_path = config['paths']['sadtalker_path']
+data_human_path = config['paths']['data_human_path']
+source_image_path = config['paths']['source_image_path']
 
 def main(args):
     #torch.backends.cudnn.enabled = False
@@ -99,11 +114,18 @@ def main(args):
 def param(path: str):
     parser = ArgumentParser()  
     parser.add_argument("--driven_audio", default=path, help="path to driven audio")
-    parser.add_argument("--source_image", default='./source_image/full_body_1.png', help="path to source image")
+    # parser.add_argument("--source_image", default='./source_image/full_body_1.png', help="path to source image")
+    assert source_image_path != None
+    parser.add_argument("--source_image", default=source_image_path, help="path to source image")
     parser.add_argument("--ref_eyeblink", default=None, help="path to reference video providing eye blinking")
     parser.add_argument("--ref_pose", default=None, help="path to reference video providing pose")
-    parser.add_argument("--checkpoint_dir", default='/root/models/sadtalker', help="path to output")
-    parser.add_argument("--result_dir", default='/root/wenlv/data_human/results', help="path to output")
+    # parser.add_argument("--checkpoint_dir", default='/root/models/sadtalker', help="path to output")
+    assert sadtalker_path != None
+    parser.add_argument("--checkpoint_dir", default=sadtalker_path, help="path to output")
+    # sadtalker_path
+    # parser.add_argument("--result_dir", default='/root/wenlv/data_human/results', help="path to output")
+    assert data_human_path != None
+    parser.add_argument("--result_dir", default= data_human_path, help="path to output")
     parser.add_argument("--pose_style", type=int, default=0,  help="input pose style from [0, 46)")
     parser.add_argument("--batch_size", type=int, default=2,  help="the batch size of facerender")
     parser.add_argument("--size", type=int, default=256,  help="the image size of the facerender")
