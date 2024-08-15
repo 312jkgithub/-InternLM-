@@ -49,7 +49,7 @@
  conda env create -f  cosyvoice.yml
 ```
 
-#### TTS环境准备
+#### 数字人环境准备
 
 ```bash
  cd environment
