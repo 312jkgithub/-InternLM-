@@ -56,7 +56,35 @@
  conda env create -f  sadtalker.yml
 ```
 
+### 模型下载
+
+[下载微调的基座大模型](https://openxlab.org.cn/models/detail/ljk-0/wenlv)
+[下载BCE模型](https://www.modelscope.cn/models/netease-youdao/bce-embedding-base_v1)
+[下载CosyVoice模型](https://www.modelscope.cn/models/iic/CosyVoice-300M-SFT)
+[下载sadtalker模型](https://www.modelscope.cn/models/wwd123/sadtalker)
+
+
 ### 系统运行
+
+#### 修改配置文件
+
+修改config.ini文件
+
+```bash
+[paths]
+audio_folder_path = #tts音频存储地址
+CosyVoice_model_path =  #cosyvoice下载模型地址
+llm_model_path =  #微调的llm模型地址
+db_vector_path = ./db_vector
+embedding_path =  #bce模型地址
+sadtalker_path = #下载的sadtakler的checkpoints地址
+data_human_path =   # 数字人存储地址
+source_image_path = ./source_image/full_body_1.png
+```
+
+将下载的sadtakler模型权重中的gfpgan下边的weights内的所有文件移动到data_human/gfpgan/weights这个目录下边。
+
+#### 运行服务
 
 运行页面端
 
