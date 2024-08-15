@@ -53,7 +53,7 @@ def splite_md(file_path :str):
     docs = markdown_splitter.split_text(markdown_content)
     return docs
 
-def create_db_vector(embed :HuggingFaceEmbeddings,docs):
+def create_db_vector(embed ,docs):
     # 将文档进行向量化处理
     db = FAISS.from_documents(docs, embed)
     # db_path="./db_vector"
@@ -62,7 +62,7 @@ def create_db_vector(embed :HuggingFaceEmbeddings,docs):
     print("保存成功")
     return db_vector
 
-def get_vectordb(embed: HuggingFaceEmbeddings,db_path:str='./db_vector'):
+def get_vectordb(embed,db_path:str='./db_vector'):
     db=FAISS.load_local(folder_path= db_path, index_name='wenlv', embeddings=embed,
                         allow_dangerous_deserialization=True,
                 distance_strategy=DistanceStrategy.MAX_INNER_PRODUCT)
